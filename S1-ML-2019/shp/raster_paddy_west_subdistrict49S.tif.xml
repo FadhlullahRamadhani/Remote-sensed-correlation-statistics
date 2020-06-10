@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en"><Esri><CreaDate>20190621</CreaDate><CreaTime>07142300</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process ToolSource="c:\program files (x86)\arcgis\desktop10.6\ArcToolbox\Toolboxes\Conversion Tools.tbx\FeatureToRaster" Date="20190621" Time="071423">FeatureToRaster paddy_subdistrict_west_49S id_kecamat C:\MasseyOffice1\Research\R-Script2019\shp\raster_paddy_west_subdistrict49S.tif 25</Process></lineage></DataProperties></Esri></metadata>
