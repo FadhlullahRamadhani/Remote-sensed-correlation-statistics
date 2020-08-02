@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<metadata xml:lang="en"><Esri><CreaDate>20181218</CreaDate><CreaTime>15435800</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process ToolSource="c:\program files (x86)\arcgis\desktop10.5\ArcToolbox\Toolboxes\Spatial Analyst Tools.tbx\ExtractByMask" Date="20181218" Time="154358">ExtractByMask dem_java_49s.tif paddy_3522 C:\MasseyOffice1\Research\R-Script\S1-java-utm-2018-S3-CP\shp\DEM\dem_3522.tif</Process></lineage></DataProperties></Esri></metadata>
