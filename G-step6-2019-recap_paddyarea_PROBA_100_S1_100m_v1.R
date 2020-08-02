@@ -1,7 +1,7 @@
 
 rm(list=ls())
 
-setwd("F:/MasseyOffice1/Research/R-Script2019/")
+setwd("C:/MasseyOffice1/Research/R-Script2019/")
 #
 # 
 results <- data.frame(
@@ -104,7 +104,8 @@ for (j in 1:length(idkab)){
 
 
 
-mainDir_results<- paste("F:/MasseyOffice1/Research/R-Script2019/",sep="")
+mainDir_results<- paste("C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/",sep="")
 
-filename_csv_paddy_subdistrict <- paste(mainDir_results,"recap_stats_S1_PROBA_v1.csv", sep="")
+filename_csv_paddy_subdistrict <- paste(mainDir_results,"recap.csv", sep="")
 write.csv(results, file = filename_csv_paddy_subdistrict)
+
