@@ -3,7 +3,7 @@ rm(list=ls())
 library(tseries)
 library(dynlm)
 library(sandwich)
-setwd("F:/MasseyOffice1/Research/R-Script2019/")
+setwd("C:/MasseyOffice1/Research/R-Script2019/")
 
 Find_Max_CCF<- function(a,b,minvalue,maxvalue)
 {
@@ -20,7 +20,7 @@ Find_Max_CCF<- function(a,b,minvalue,maxvalue)
 
 
 
-file_csv <- "F:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/analysis_area_v3.csv"
+file_csv <- "C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/analysis_area_v3.csv"
 dat = as.data.frame(read.csv(file_csv, header = TRUE))
 
 data_clear <- dat[dat$period != "'2017-12-31",]
@@ -99,6 +99,6 @@ for (i in 1:dim(data_admin)[1]) {
   
 }
 
-write.csv(data_admin, file = "F:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/analysis_corr_v7.csv")
+write.csv(data_admin, file = "C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/analysis_corr_v7.csv")
 
 

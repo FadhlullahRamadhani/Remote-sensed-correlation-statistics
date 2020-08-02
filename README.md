@@ -16,11 +16,11 @@ II. Classification PROBA-V process
 A. Separate the PROBA-V-Bands with A-step1-PROBA_separate_bands1.R and A-step2-PROBA_split_paddy1.R masking each band according to rice field area (with ArcGIS installed. adjust the folder of ArcPy)
 
 B. Building PROBA-V the model
-1. Extracting on points from S-2 classification just for four rice condition: 1. Bare land, 2. Vegetative, 3. Reproductive, 4. Ripening. The dataset is ML_PROBA_100m_2019_v1.xlsx
+1. Extracting on points from S-2 classification just for four rice condition: 1. Bare land, 2. Vegetative, 3. Reproductive, 4. Ripening. The dataset is ML_PROBA_100m_2020_v1.xlsx
 
 2. Only data with good pixel quality is processed
 
-3. Building the model using SVM Radial and tuning it using B-ML_PROBA-100m_2019_v1.r
+3. Building the model using SVM Radial and tuning it using B-ML_PROBA_100m_2020_v1.r
 
 4. Change RDS path file to best model on C-step1-2019_classify_PROBA_v2.R
 
@@ -32,20 +32,18 @@ C. Running the PROBA-V model
 
 
 II. Classification S-1 process
-D. Aggregate and masking from rice area VH and VV of Sentinel-1 with D-Step1-S1_LEE_VH_AGGREGATE_SPLIT.R and D-Step1-S1_LEE_VV_AGGREGATE_SPLIT.R masking each band according to rice field area (with ArcGIS installed. adjust the folder of ArcPy)
+D. Aggregate and masking from rice area VH of Sentinel-1 with D-Step1-S1_LEE_VH_AGGREGATE_SPLIT.R masking each band according to rice field area (with ArcGIS installed. adjust the folder of ArcPy)
 
 E. Building S-1 the model
-1. Extracting on points from S-2 classification just for four rice condition: 1. Bare land, 2. Vegetative, 3. Reproductive, 4. Ripening. The dataset is S1_LEE_DATA_ML_v7_WEST_USED.xlsx
+1. Extracting on points from S-2 classification just for four rice condition: 1. Bare land, 2. Vegetative, 3. Reproductive, 4. Ripening. The dataset is ML_S1_100m_2020_v1.xlsx
 
-2. Only data with good pixel quality is processed
+2. Building the model using SVM Radial and tuning it using E-ML_S1_100m_2020_v1.R
 
-3. Building the model using SVM Radial and tuning it using E-ML_S1_LEE_2019_v7_WEST.R
-
-4. Change RDS path file to best model on F-step1-2019_classify_S1_LEE_allresV4_3212.R
+3. Change RDS path file to best model on F-step1-2019_classify_S1_LEE_allresV4.R
 
 
 F. Running S-1 the model
-1. Run F-step1-2019_classify_S1_LEE_allresV4_3212.R for classifying\
+1. Run F-step1-2019_classify_S1_LEE_allresV4.R for classifying
 
 2. Run F-step2-2019_merge_S1_12days.R for merging between S-1 tiles
 
@@ -65,34 +63,9 @@ G. Composite process
 
 6. Run G-step6-2019_recap_paddyarea_SENSOR_PROBA_100_S1_100m_v2.R for recapitulate area
 
-H. Cross-correlation
+H. Cross-correlation (analisis_PROBA_S1)
 
-1. Run D-step1-2019_CHANGE_ALLv1 for detecting change classes with 5,10,15,20,25,30 lag days
+1. Run analysis_v3.R for syncronizing with local statistics
 
-2. Run D-step2-Recap-Change_V4.R for recaping the change detection data
-
-III. Classification MOD13Q1 process
-A. Pre-processing
-1. Separating bands from original MOD13Q1 with A.1.MOD13Q1_separate_band.R 
-
-2. Cliping the MOD13Q1-Bands with A.2.MOD13Q1_ARCPY_PADDY1.R and A.3.MOD13Q1_split_band_region.R (with ArcGIS installed. adjust the folder of ArcPy)
-
-3. resampling MOD13Q1 bands into 10m A.4.MOD13Q1_resample10m_band_region.R
-
-B. Building the model 
-1. Labelling on points from field survey just for five rice condition: 1. Bare land, 2. Flooding, 3. Vegetative, 4. Reproductive, 5. Ripening.
-
-2. Building the model using SVM Radial with dataset S1_MOD13Q1_ML_v6.xlsx and tuning it using B.S1_MOD13Q1_ML_v6.r
-
-3. Change RDS path file to best model on C-Run-ML-MOD13Q1_S1_classify_v6_2019.R
-
-C. Running the model
-
-1. Run C-Run-ML-MOD13Q1_S1_classify_v6_2019.R for each district.
-
-D. Temporal changes
-
-1. Run D.MOD13Q1_change_v1.R for detecting change classes with 16 lag days
-
-2. Run D.Recap-Change_MOD13Q1.R for recaping the change detection data
+2. Run korelasi7.R for analyzing both data with autocorrelation with the highest correlation
 

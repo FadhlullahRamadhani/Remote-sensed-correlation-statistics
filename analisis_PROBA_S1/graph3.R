@@ -11,10 +11,10 @@ library(hexbin)
 library(reshape2)
 library(ggrepel)
 library(stringr)
-mainDir_results<- paste("F:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/",sep="")
-setwd("F:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/")
-
-file_csv <- "F:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/analysis_area_v3.csv"
+mainDir_results<- paste("C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/",sep="")
+setwd("C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/")
+dir.create("C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/sd",showWarnings = FALSE)
+file_csv <- "C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/analysis_area_v3.csv"
 charts.data = as.data.frame(read.csv(file_csv, header = TRUE))
 charts.data$tgl <- as.Date(substr(charts.data$period,2,20),"%Y-%m-%d")
 charts.data$tanggal <- format(charts.data$tgl,"%Y-%m-%d")
@@ -173,6 +173,7 @@ ggsave(filename="RS_SD2.png", plot=p4, device="png",
 
 listkabkec <- unique(charts.data$kabkec)
 listkabkec2 <- unique(charts.data$kabkec2)
+
 
 for (i in 1:length(listkabkec)) {
   kabkec_current <- listkabkec[i]

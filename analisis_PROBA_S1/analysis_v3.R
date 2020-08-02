@@ -3,9 +3,9 @@ library(readxl)
 library(xlsx)
 library(beepr)
 
-crops <- read_excel("F:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/merge.xlsx")
+crops <- read_excel("C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/merge.xlsx")
 crops$period1 <- crops$`THN-BLN`
-recap <- read_excel("F:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/recap.xlsx")
+recap <- read.csv("C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/recap.csv")
 
 recap_merge <- recap
 recap_merge$total <- recap_merge$area_ha_1+ recap_merge$area_ha_2+ recap_merge$area_ha_3 +	recap_merge$area_ha_4	
@@ -32,7 +32,7 @@ for (i in 1:nrow(recap_merge)) {
   }
 }
 
-area_xlsx <- read_excel("F:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/area_luas_baku.xlsx")
+area_xlsx <- read_excel("C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/area_luas_baku.xlsx")
 
 recap_merge$luas_baku_ha <- NA
 recap_merge$area_RS <- NA
@@ -57,11 +57,11 @@ recap_merge1 <- recap_merge[,c("PROVINSI","KABUPATEN","KECAMATAN","subdistrict",
                               "period1","period","BL","VEG","REPRO","RIPE","total","Paddy_planting",
                               "Paddy_harvested","luas_baku_ha","area_RS","area_factor")]
 
-write.csv(recap_merge1, file = "F:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/analysis_full_v3.csv")
+write.csv(recap_merge1, file = "C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/analysis_full_v3.csv")
 
 recap_merge1 <- recap_merge1[recap_merge1$TAHUN %in% c("2017","2018"),]
 recap_merge1 <- recap_merge1[!recap_merge1$period1 %in% c("2018-08","2018-09","2018-10","2018-11","2018-12"),]
 
-write.csv(recap_merge1, file = "F:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/analysis_area_v3.csv")
+write.csv(recap_merge1, file = "C:/MasseyOffice1/Research/R-Script2019/analisis_PROBA_S1/analysis_area_v3.csv")
 beep(sound = 4)
 
