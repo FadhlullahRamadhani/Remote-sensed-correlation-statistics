@@ -1,14 +1,14 @@
 
 rm(list=ls())
 
-setwd("C:/MasseyOffice1/Research/R-Script2019/")
+setwd("F:/MasseyOffice1/Research/R-Script2019/")
 #'B4','B3','B2','B5'
 
 mainDir_BANDS <- paste("F:/R-Script-DriveF/S1-ML-2019/BANDS",sep="")
 mainDir_BAT <- paste("F:/R-Script-DriveF/S1-ML-2019/",sep="")
 mainDir_SHP_major <- paste("F:/R-Script-DriveF/S1-ML-2019/shp/paddy_utm",sep="")
 
-regencies <- c("WEST", "EAST")
+regencies <- c("WEST")
 
 #idkab<- 3215
 model_ML <-"svmRadial10"

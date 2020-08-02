@@ -2,10 +2,10 @@ rm(list=ls())
 library(raster)
 library(rgdal)
 library(readxl)
-setwd("C:/MasseyOffice1/Research/R-Script2019/")
+setwd("F:/MasseyOffice1/Research/R-Script2019/")
 
 regencies <- c("WEST", "EAST")
-#regencies <- c("WEST")
+regencies <- c("WEST")
 #idkab<- 3215
 model_ML <-"svmRadial10"
 region <-"32"

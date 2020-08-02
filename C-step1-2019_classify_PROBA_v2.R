@@ -17,8 +17,7 @@ right = function(text, num_char) {
 }
 args <- commandArgs(trailingOnly = TRUE)
 print(args)
-mod_number <- as.integer(args[2])
-mod_div <- as.integer(args[1])
+
 
 library(raster)
 library(rgdal)
@@ -33,38 +32,37 @@ clear_water <- c(248,249,250)
 mainDir <- paste("F:/R-Script-DriveF/ML-PROBA-100/BANDS-PADDY/BLUE/",sep="")
 setwd(file.path(mainDir))
 #WithMasking_LOOCV_LS8_nnet_center_scale_100
-mainDir1 <- paste("F:/R-Script-DriveF/ML-PROBA-100-3212/MODEL/svmRadial/",collapse = "",sep = "")
-filename <- paste(mainDir1,"WithMasking_LOOCV_ML_PROBA_100m_2019_v1_svmRadial_noProc_0001.rds", sep="")
+mainDir1 <- paste("F:/R-Script-DriveF/ML-PROBA-100/ML_PROBA_100m_2020_v1/svmRadial/",collapse = "",sep = "")
+filename <- paste(mainDir1,"WithMasking_LOOCV_ML_PROBA_100m_2020_v1_svmRadial_noProc_0001.rds", sep="")
 allModelsResults <- readRDS(filename)
-regencies <- c("WEST", "EAST")
+regencies <- c("WEST")
 #regencies <- c("WEST")
 #idkab <- c(3212,3213,3215)
 for (region in regencies) { 
   search_str <- paste("*",region,".*[.]tif$",sep = "")
   files <- sort(list.files(pattern=search_str),decreasing = FALSE)
   for (i in 1:length(files)){
-    if (i %% mod_div != mod_number) {
-      next
-    }
     filename_original <-files[i]
     date_str <- substr(filename_original,42,49)
     period <- as.Date(date_str,format = "%Y%m%d")
     
-    
+    if (!((period>=as.Date("2016-12-31")) & ((period<=as.Date("2018-09-30"))))) {
+      next
+    }
     #model <- c('fda','nnet','rf','svmLinear','svmPoly','svmRadial')
     model_ML <- c('svmRadial06')
-    folder <- paste("F:/R-Script-DriveF/ML-PROBA-100-3212/CLASSIFY-PADDY/",collapse = "",sep = "")
+    folder <- paste("F:/R-Script-DriveF/ML-PROBA-100/CLASSIFY-PADDY/",collapse = "",sep = "")
     dir.create(folder, showWarnings = FALSE)
-    folder <- paste("F:/R-Script-DriveF/ML-PROBA-100-3212/CLASSIFY-PADDY/",period,"",collapse = "",sep = "")
+    folder <- paste("F:/R-Script-DriveF/ML-PROBA-100/CLASSIFY-PADDY/",period,"",collapse = "",sep = "")
     dir.create(folder, showWarnings = FALSE)
-    folder <- paste("F:/R-Script-DriveF/ML-PROBA-100-3212/CLASSIFY-PADDY/",period,"/",model_ML,"/",collapse = "",sep = "")
+    folder <- paste("F:/R-Script-DriveF/ML-PROBA-100/CLASSIFY-PADDY/",period,"/",model_ML,"/",collapse = "",sep = "")
     dir.create(folder, showWarnings = FALSE)
     
-    folder_classify_mask <- paste("F:/R-Script-DriveF/ML-PROBA-100-3212/CLASSIFY-PADDY-MASK/",collapse = "",sep = "")
+    folder_classify_mask <- paste("F:/R-Script-DriveF/ML-PROBA-100/CLASSIFY-PADDY-MASK/",collapse = "",sep = "")
     dir.create(folder_classify_mask, showWarnings = FALSE)
-    folder_classify_mask <- paste("F:/R-Script-DriveF/ML-PROBA-100-3212/CLASSIFY-PADDY-MASK/",period,"/",collapse = "",sep = "")
+    folder_classify_mask <- paste("F:/R-Script-DriveF/ML-PROBA-100/CLASSIFY-PADDY-MASK/",period,"/",collapse = "",sep = "")
     dir.create(folder_classify_mask, showWarnings = FALSE)
-    folder_classify_mask <- paste("F:/R-Script-DriveF/ML-PROBA-100-3212/CLASSIFY-PADDY-MASK/",period,"/",model_ML,"/",collapse = "",sep = "")
+    folder_classify_mask <- paste("F:/R-Script-DriveF/ML-PROBA-100/CLASSIFY-PADDY-MASK/",period,"/",model_ML,"/",collapse = "",sep = "")
     dir.create(folder_classify_mask, showWarnings = FALSE)
     filename_result_classify_mask <- paste(folder_classify_mask,region,"_", period, "_PROBA_100_classify_paddy_mask_",model_ML, sep="")
     filename_tif_classify_mask <- paste(folder_classify_mask,region,"_", period,"_PROBA_100_classify_paddy_mask_",model_ML,".tif", sep="")
@@ -147,24 +145,12 @@ for (region in regencies) {
     SWIR_raster_df_template <- as.data.frame(SWIR_raster)
     SWIR_raster_df[is.na(SWIR_raster_df)] <- -999
     
-    band_name <- paste("F:/R-Script-DriveF/ML-PROBA-100/BANDS-PADDY/NDVI/PADDY_PROBA-TOC-NDVI-100m-utm-",region,"-",date_str,".tif",sep = "")
-    if (file.exists(band_name)==FALSE) {
-      next
-    }
-    NDVI_NA <- raster(band_name)
-    NDVI_NA[NDVI_NA==0] <- NA
-    NDVI_raster <- NDVI_NA
-    NDVI_raster_df <- as.data.frame(NDVI_raster)
-    NDVI_raster_df_template <- as.data.frame(NDVI_raster)
-    NDVI_raster_df[is.na(NDVI_raster_df)] <- -999
-    
-    
-    
+
     JAVA_classify_df <- data.frame(RED=RED_raster_df,NIR=NIR_raster_df,
                                    BLUE=BLUE_raster_df,SWIR=SWIR_raster_df,
-                                   NDVI=NDVI_raster_df,stringsAsFactors=FALSE)
+                                   stringsAsFactors=FALSE)
     
-    colnames(JAVA_classify_df) <- c("RED","NIR","BLUE","SWIR","NDVI")
+    colnames(JAVA_classify_df) <- c("RED","NIR","BLUE","SWIR")
     NIR_NA <- NA
     NIR_raster <- NA
     NIR_raster_df <- NA
@@ -179,11 +165,7 @@ for (region in regencies) {
     SWIR_raster <- NA
     SWIR_raster_df <- NA
     SWIR_raster_df_template <- NA
-    
-    NDVI_NA <- NA
-    NDVI_raster <- NA
-    NDVI_raster_df <- NA
-    NDVI_raster_df_template <- NA
+
     
  
     print ("predicting")

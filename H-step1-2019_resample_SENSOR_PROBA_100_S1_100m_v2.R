@@ -21,7 +21,7 @@ for (j in 1:length(period_list)) {
   composite_str <- period_str[j]
   folder_ML_classify_fmask <-  paste("F:/R-Script-DriveF/ML-PROBA-100-S1-100/CLASSIFY-COMPOSITE-",composite_str,"/",collapse = "",sep = "")
   period_list_classify <- sort(list.dirs(folder_ML_classify_fmask,full.names = FALSE,recursive = FALSE),decreasing = FALSE)
-
+  
   print(composite)
   if (length(period_list_classify)==0) {
     next
@@ -32,24 +32,26 @@ for (j in 1:length(period_list)) {
       next
     }
     period_date <- as.Date(period)
-    folder_to <- paste("F:/R-Script-DriveF/ML-PROBA-100-S1-100/CLASSIFY-COMPOSITE-",composite_str,"-25m/",collapse = "",sep = "")
+    folder_to <- paste("F:/R-Script-DriveF/ML-PROBA-100-S1-100/CLASSIFY-COMPOSITE-SENSOR-",composite_str,"-25m/",collapse = "",sep = "")
     dir.create(folder_to, showWarnings = FALSE)
-    folder_to <- paste("F:/R-Script-DriveF/ML-PROBA-100-S1-100/CLASSIFY-COMPOSITE-",composite_str,"-25m/",period,"/",collapse = "",sep = "")
+    folder_to <- paste("F:/R-Script-DriveF/ML-PROBA-100-S1-100/CLASSIFY-COMPOSITE-SENSOR-",composite_str,"-25m/",period,"/",collapse = "",sep = "")
     dir.create(folder_to, showWarnings = FALSE)
-    folder_to <- paste("F:/R-Script-DriveF/ML-PROBA-100-S1-100/CLASSIFY-COMPOSITE-",composite_str,"-25m/",period,"/",model_ML,"/",collapse = "",sep = "")
+    folder_to <- paste("F:/R-Script-DriveF/ML-PROBA-100-S1-100/CLASSIFY-COMPOSITE-SENSOR-",composite_str,"-25m/",period,"/",model_ML,"/",collapse = "",sep = "")
     dir.create(folder_to, showWarnings = FALSE)
     
-    folder_ori <-   paste("F:/R-Script-DriveF/ML-PROBA-100-S1-100/CLASSIFY-COMPOSITE-",composite_str,"-REPAIR/",period,"/",model_ML,"/",collapse = "",sep = "")
+    folder_ori <-   paste("F:/R-Script-DriveF/ML-PROBA-100-S1-100/CLASSIFY-COMPOSITE-",composite_str,"/",period,"/",model_ML,"/",collapse = "",sep = "")
     if (dir.exists(folder_ori)==FALSE) {
       next
     } 
     setwd(file.path(folder_ori))
-    file_from <- paste(region,"_",period,"_PROBA-S1-100_ML_REPAIR_",composite_str,"_",model_ML,".tif", sep="")
+    file_from <- paste(region,"-",period,"_PROBA-S1-100_ML_SENSOR_utm_",composite_str,"_",model_ML,".tif", sep="")
+    
+    #WEST-2017-01-12_PROBA-S1-100_ML_SENSOR_utm_12_svmRadial0610.tif
     
     if (file.exists(file_from)==FALSE) {
       next
     }
-    file_to <- paste(folder_to,region,"-",period,"_PROBA_S1_ML_utm_COMPOSITE_25m_",composite_str,"_",model_ML,".tif", sep="")
+    file_to <- paste(folder_to,region,"-",period,"_PROBA_S1_ML_utm_SENSOR_25m_",composite_str,"_",model_ML,".tif", sep="")
     
     if (file.exists(file_to)==FALSE) {
       #print(paste(region,name_band_to,sep="-"))
@@ -58,7 +60,7 @@ for (j in 1:length(period_list)) {
     }
   }
   temp <- gsub("\\", "\\\\", temp, fixed = TRUE)
-  filename1 <- paste(mainDir_BAT, "/","run_PROBA_S1_sampling_25m_",composite_str,".bat",sep="")
+  filename1 <- paste(mainDir_BAT, "/","run_PROBA_sensor_S1_sampling_25m_",composite_str,".bat",sep="")
   write(temp,file = filename1)
   
 }

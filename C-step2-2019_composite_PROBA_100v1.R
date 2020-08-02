@@ -4,7 +4,7 @@ library(rgdal)
 library(readxl)
 
 
-regencies <- c("WEST", "EAST")
+regencies <- c("WEST")
 #regencies <- c("EAST", "WEST")
 #regencies <- c("WEST")
 #idkab<- 3215

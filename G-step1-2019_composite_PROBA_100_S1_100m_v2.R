@@ -4,8 +4,8 @@ library(rgdal)
 library(readxl)
 
 
-regencies <- c("WEST", "EAST")
-regencies_prov <- c("32", "35")
+regencies <- c("WEST")
+regencies_prov <- c("32")
 #regencies <- c("EAST", "WEST")
 #regencies <- c("WEST")
 #idkab<- 3215
@@ -21,7 +21,8 @@ for (i in 1:length(regencies)){
 
   folder_ML_classify_fmask <- paste("F:/R-Script-DriveF/S1-ML-2019/CLASSIFY-100m-MERGE-MAJOR-12",sep="")
   
-  period_list_classify <- sort(list.dirs(folder_ML_classify_fmask,full.names = FALSE,recursive = FALSE),decreasing = FALSE)
+  period_list_classify <- sort(list.dirs(folder_ML_classify_fmask,full.names = FALSE,recursive = FALSE),
+                               decreasing = FALSE)
   
   
   int_k<-1
@@ -48,7 +49,7 @@ for (i in 1:length(regencies)){
     }
     print(period)
     
-    mainDir_PROBA <- paste("F:/R-Script-DriveF/ML-PROBA-100-3212/CLASSIFY-MASK-COMPOSITE-12/",period,"/",model_ML_PROBA,"/",sep="")
+    mainDir_PROBA <- paste("F:/R-Script-DriveF/ML-PROBA-100/CLASSIFY-MASK-COMPOSITE-12/",period,"/",model_ML_PROBA,"/",sep="")
     if (dir.exists(mainDir_PROBA)==FALSE) {
       next
     }
